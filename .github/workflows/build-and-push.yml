@@ -22,9 +22,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Get the build number
+        id: build_number
+        run: echo "::set-output name=build_number::${{ github.run_number }}"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: wesaleldsokey/nodejs:latest
+          tags: wesaleldsokey/nodejs:${{ steps.build_number.outputs.build_number }}
