@@ -26,6 +26,9 @@ jobs:
         id: build_number
         run: echo "::set-output name=build_number::${{ github.run_number }}"
 
+      - name: Debug Docker image tag
+        run: echo "Docker image tag: wesaleldsokey/nodejs:${{ steps.build_number.outputs.build_number }}-amd64"
+
       - name: Build Docker image for AMD64
         run: |
           docker buildx build \
