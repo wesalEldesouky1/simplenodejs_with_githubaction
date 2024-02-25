@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as the base image
-FROM node:latest
+FROM --platform=linux/arm64 node:14
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,4 +18,3 @@ EXPOSE 3000
 
 # Define the command to run the app
 CMD [ "node", "server.js" ]
-
