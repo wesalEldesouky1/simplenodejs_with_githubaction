@@ -38,5 +38,5 @@ WORKDIR /app
 # COPY --from=build /app/dist ./dist
 COPY package.json package-lock.json ./
 RUN npm install --production
-CMD ["node", "dist/server.js"]
+CMD ["node", "server.js"]
 
