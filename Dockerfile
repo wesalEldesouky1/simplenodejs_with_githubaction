@@ -25,7 +25,7 @@ FROM node:14 AS build
 
 # Set up your build steps
 WORKDIR /app
-COPY package.json package-lock.json ./
+# COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
 
@@ -35,7 +35,7 @@ RUN /bin/bash
 # Final stage
 FROM node:14
 WORKDIR /app
-COPY --from=build /app/dist ./dist
+# COPY --from=build /app/dist ./dist
 COPY package.json package-lock.json ./
 RUN npm install --production
 CMD ["node", "dist/server.js"]
