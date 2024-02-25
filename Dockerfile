@@ -21,22 +21,21 @@
 
 # # test
 # Use a multi-stage build
+# Use a multi-stage build
 FROM node:14 AS build
 
 # Set up your build steps
 WORKDIR /app
-# COPY package.json package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-
-# Debugging step
-RUN /bin/bash
+RUN npm run build
 
 # Final stage
 FROM node:14
 WORKDIR /app
-# COPY --from=build /app/dist ./dist
+COPY --from=build /app/dist ./dist
 COPY package.json package-lock.json ./
 RUN npm install --production
-CMD ["node", "server.js"]
+CMD ["node", "dist/server.js"]
 
